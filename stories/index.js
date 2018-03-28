@@ -1,10 +1,13 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Highcharts from 'highcharts';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Calculator from './Calculator';
 import ChartDemo from './ChartDemo';
+
+import './chartStyles.css';
 
 storiesOf('Calculator', module)
 	.add('a simple calculator', () => (
@@ -16,6 +19,12 @@ storiesOf('Highcharts Demo', module)
 		let options = {
 			"chart": {
 				"zoomType": "xy"
+			},
+			"title": {
+				"text": "This is a title"
+			},
+			"subtitle": {
+				"text": "The interval of xAxis is 14 days"
 			},
 			"yAxis": [{
 				"lineWidth": 1,
@@ -39,11 +48,11 @@ storiesOf('Highcharts Demo', module)
 					"label": {
 						"rotation": 0,
 						"y": 10,
-						"x": -80,
+						"x": -280,
 						"style": {
 							"fontStyle": "italic"
 						},
-						"text": "present time"
+						"text": "past time"
 					}
 				}, {
 					"color": "black",
@@ -53,15 +62,29 @@ storiesOf('Highcharts Demo', module)
 					"label": {
 						"rotation": 0,
 						"y": 10,
-						"x": -80,
+						"x": -250,
 						"style": {
 							"fontStyle": "italic"
 						},
-						"text": "another time"
+						"text": "present time"
+					}
+				}, {
+					"width": 0,
+					"value": 1525441819497,
+					"label": {
+						"rotation": 0,
+						"y": 10,
+						"x": 90,
+						"style": {
+							"fontStyle": "italic"
+						},
+						"text": "future time"
 					}
 				}]
 			},
 			"series": [{
+				//"visible": false,
+				//"showInLegend": false,
 				"name": "past sampling per forecast group",
 				"type": "spline",
 				"data": [
@@ -151,7 +174,7 @@ storiesOf('Highcharts Demo', module)
 					[1520344219497, 1027]
 				]
 			}, {
-				"name": "forecast group",
+				"name": "current group",
 				"type": "spline",
 				"dashStyle": "ShortDash",
 				"data": [
@@ -269,44 +292,44 @@ storiesOf('Highcharts Demo', module)
 					[1525441819497, 0]
 				]
 			}, {
-				"name": "another",
+				"name": "forecast group",
 				"type": "spline",
 				"data": [
 					[1525441819497, 1132],
-					[1525528219497, 1132],
-					[1525614619497, 1132],
-					[1525701019497, 1132],
-					[1525787419497, 1132],
-					[1525873819497, 1132],
+					[1525528219497, 1162],
+					[1525614619497, 1232],
+					[1525701019497, 1332],
+					[1525787419497, 1432],
+					[1525873819497, 1402],
 					[1525960219497, 1132],
-					[1526046619497, 1132],
-					[1526133019497, 1132],
-					[1526219419497, 1132],
+					[1526046619497, 1311],
+					[1526133019497, 1311],
+					[1526219419497, 1311],
 					[1526305819497, 1132],
 					[1526392219497, 1132],
-					[1526478619497, 1132],
+					[1526478619497, 932],
 					[1526565019497, 1132],
 					[1526651419497, 1132],
-					[1526737819497, 1132],
-					[1526824219497, 1132],
-					[1526910619497, 1132],
-					[1526997019497, 1132],
-					[1527083419497, 1132],
-					[1527169819497, 1132],
-					[1527256219497, 1132],
-					[1527342619497, 1132],
-					[1527429019497, 1132],
-					[1527515419497, 1132],
-					[1527601819497, 1132],
-					[1527688219497, 1132],
-					[1527774619497, 1132],
-					[1527861019497, 1132],
-					[1527947419497, 1132],
-					[1528033819497, 1132],
-					[1528120219497, 1132],
-					[1528206619497, 1132],
-					[1528293019497, 1132],
-					[1528379419497, 1132]
+					[1526737819497, 1200],
+					[1526824219497, 1400],
+					[1526910619497, 1990],
+					[1526997019497, 1900],
+					[1527083419497, 1900],
+					[1527169819497, 1632],
+					[1527256219497, 1732],
+					[1527342619497, 1682],
+					[1527429019497, 1532],
+					[1527515419497, 1632],
+					[1527601819497, 1832],
+					[1527688219497, 2022],
+					[1527774619497, 2022],
+					[1527861019497, 2222],
+					[1527947419497, 2022],
+					[1528033819497, 2422],
+					[1528120219497, 2022],
+					[1528206619497, 2022],
+					[1528293019497, 2822],
+					[1528379419497, 3022]
 				]
 			},]
 		};
@@ -337,30 +360,30 @@ storiesOf('Highcharts Demo', module)
 				crosshair: true
 			}],
 			yAxis: [{
-					lineWidth: 1,
-					lineColor: Highcharts.getOptions().colors[0],
-					tickWidth: 1,
-					tickColor: Highcharts.getOptions().colors[0],
-					offset: 100,
-					min: 0,
-					max: 24,
-					title: {
-						text: 'Humidity',
-						align: "high",
-						rotation: 0,
-						y: -20,
-						x: 50,
-						style: {
-							color: Highcharts.getOptions().colors[0]
-						}
-					},
-					labels: {
-						format: '{value}%',
-						style: {
-							color: Highcharts.getOptions().colors[0]
-						}
-					},
-					//offset: 100
+				lineWidth: 1,
+				lineColor: Highcharts.getOptions().colors[0],
+				tickWidth: 1,
+				tickColor: Highcharts.getOptions().colors[0],
+				offset: 100,
+				min: 0,
+				max: 24,
+				title: {
+					text: 'Humidity',
+					align: "high",
+					rotation: 0,
+					y: -20,
+					x: 50,
+					style: {
+						color: Highcharts.getOptions().colors[0]
+					}
+				},
+				labels: {
+					format: '{value}%',
+					style: {
+						color: Highcharts.getOptions().colors[0]
+					}
+				},
+				//offset: 100
 			}, {
 				gridLineWidth: 0,
 				lineWidth: 1,
@@ -486,7 +509,7 @@ storiesOf('Highcharts Demo', module)
 		};
 		return (<ChartDemo options={options} />);
 	})
-	.add('3 zones with click event', () => {
+	.add('3 zones with events on chart', () => {
 		let options = {
 			"chart": {
 				"type": "scatter",
@@ -499,16 +522,39 @@ storiesOf('Highcharts Demo', module)
 							event.xAxis[0].axis.toPixels(event.xAxis[0].value),
 							event.yAxis[0].axis.toPixels(event.yAxis[0].value)
 						)
-						.attr({
-							fill: Highcharts.getOptions().colors[0],
-							padding: 10,
-							r: 5,
-							zIndex: 8
-						})
-						.css({
-							color: '#FFFFFF'
-						})
-						.add();
+							.attr({
+								fill: Highcharts.getOptions().colors[0],
+								padding: 10,
+								r: 5,
+								zIndex: 8
+							})
+							.css({
+								color: '#FFFFFF'
+							})
+							.add();
+						setTimeout(function () {
+							label.fadeOut();
+						}, 1000);
+					},
+					selection: function (event) {
+						var text,
+							label;
+						if (event.xAxis) {
+							text = 'min: ' + Highcharts.numberFormat(event.xAxis[0].min, 2) + ', max: ' + Highcharts.numberFormat(event.xAxis[0].max, 2);
+						} else {
+							text = 'Selection reset';
+						}
+						label = this.renderer.label(text, 100, 120)
+							.attr({
+								fill: Highcharts.getOptions().colors[0],
+								padding: 10,
+								r: 5,
+								zIndex: 8
+							})
+							.css({
+								color: '#FFFFFF'
+							})
+							.add();
 						setTimeout(function () {
 							label.fadeOut();
 						}, 1000);
@@ -518,23 +564,12 @@ storiesOf('Highcharts Demo', module)
 			"legend": {
 				"enabled": false
 			},
+			tooltip: {
+				enabled: false
+			},
 			"xAxis": {
 				"max": 1,
 				"title": { "text": "business value" },
-				"plotLines": [{
-					"color": "black",
-					"dashStyle": "dot",
-					"width": 2,
-					"value": 0.2,
-					"label": {
-						"rotation": 0,
-						"y": 15,
-						"style": {
-							"fontStyle": "italic"
-						},
-						"text": "future"
-					}
-				}],
 				plotBands: [{
 					color: "#c6c6ff",
 					from: 0,
@@ -558,12 +593,12 @@ storiesOf('Highcharts Demo', module)
 				}
 			},
 			"plotOptions": {
-				"scatter": {
-					"tooltip": {
-						"headerFormat": "<b>{series.name}</b><br>",
-						"pointFormat": "accuracy: {point.x},<br> value: {point.y}"
-					}
-				},
+				// "scatter": {
+				// 	"tooltip": {
+				// 		"headerFormat": "<b>{series.name}</b><br>",
+				// 		"pointFormat": "accuracy: {point.x},<br> value: {point.y}"
+				// 	}
+				// },
 				"series": {
 					"allowPointSelect": true,
 				}
@@ -574,12 +609,12 @@ storiesOf('Highcharts Demo', module)
 					"symbol": "circle"
 				},
 				"data": [
-					[0.0883543030496564, 0.1457277778375944], 
-					[0.10514169722228507, 0.16842804390526985], 
-					[0.1040187425930491, 0.1160209262646289], 
-					[0.12598392965579424, 0.1397762869297567], 
-					[0.1389294800783096, 0.1659061383158835], 
-					[0.1611450649358704, 0.1882278008302291], 
+					[0.0883543030496564, 0.1457277778375944],
+					[0.10514169722228507, 0.16842804390526985],
+					[0.1040187425930491, 0.1160209262646289],
+					[0.12598392965579424, 0.1397762869297567],
+					[0.1389294800783096, 0.1659061383158835],
+					[0.1611450649358704, 0.1882278008302291],
 					[0.1887084729210672, 0.15416750015167584],
 					[0.1016752132709554, 0.9631089576755073],
 					[0.1733507440275247, 0.635862622153632],
@@ -679,10 +714,10 @@ storiesOf('Highcharts Demo', module)
 				zones: [{
 					value: 0.2,
 					color: '#f7a35c'
-				},{
+				}, {
 					value: 0.6,
 					color: '#7cb5ec'
-				},{
+				}, {
 					color: '#ff8080'
 				}]
 			}],
@@ -880,6 +915,259 @@ storiesOf('Highcharts Demo', module)
 					[0.5933712608546139, 0.7220593962037816],
 					[0.6640100064296749, 0.7082108921190511]
 				]
+			}]
+		};
+		return (<ChartDemo options={options} />);
+	})
+	.add('basic column with events on series and checkbox', () => {
+		let options = {
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: '各洲不同时间的人口条形图'
+			},
+			subtitle: {
+				text: '数据来源: Wikipedia.org'
+			},
+			xAxis: {
+				categories: ['非洲', '美洲', '亚洲', '欧洲', '大洋洲'],
+				title: {
+					text: null
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: '人口总量 (百万)',
+					align: 'high'
+				}
+			},
+			tooltip: {
+				valueSuffix: ' 百万'
+			},
+			plotOptions: {
+				column: {
+					dataLabels: {
+						enabled: true,
+						allowOverlap: true
+					}
+				},
+				series: {
+					allowPointSelect: true,
+					events: {
+						click: function (event) {
+							
+							console.log(this);
+
+							// var legendItem = document.getElementsByClassName("highcharts-legend-item");
+							// var itemText = legendItem[this.index].getElementsByTagName("text");
+							// itemText.className = "selectedLegendItem";
+							// console.log(itemText);
+							//this.legendItem.element.classList.push("selectedLegendItem")
+						},
+						legendItemClick: function () {
+							var visibility = this.visible ? 'visible' : 'hidden';
+							if (!confirm('The series is currently ' +
+								visibility + '. Do you want to change that?')) {
+								return false;
+							}
+
+							if (this.visible) {
+								this.checkbox.checked = false;
+							} else {
+								this.checkbox.checked = true;
+							}
+						},
+						mouseOver: function () {
+							//action('Moused over');
+						},
+						mouseOut: function () {
+							//action('Moused out');
+						},
+						checkboxClick: function (event) {
+							if (event.checked) {
+								this.show();
+							} else {
+								this.hide();
+							}
+
+							var text = 'The checkbox is now ' + event.checked;
+							if (!this.chart.lbl) {
+								this.chart.lbl = this.chart.renderer.label(text, 100, 70)
+									.attr({
+										padding: 10,
+										r: 5,
+										fill: Highcharts.getOptions().colors[1],
+										zIndex: 5
+									})
+									.css({
+										color: '#FFFFFF'
+									})
+									.add();
+							} else {
+								this.chart.lbl.attr({
+									text: text
+								});
+							}
+
+							return false;	//prevent default checkbox event
+						}
+					},
+					showCheckbox: true,
+					// point: {
+					// 	cusor: "pointer",
+					// 	events: {
+					// 		// click: function (event) {
+					// 		// 	console.log(this);
+					// 		// 	//alert('Category: ' + this.category + ', value: ' + this.y);
+					// 		// 	//console.log(".highcharts-legend-item.highcharts-series-2");
+					// 		// }
+
+					// 		// click: function (event) {
+					// 		// 	this.series.legendItem.styles.fontStyle = "italic";
+					// 		// 	this.series.legendItem.styles.fill = "#aaa";
+					// 		// 	// /console.log(this.series.legendItem.styles);
+					// 		// },
+					// 	}
+					// }
+				}
+			},
+			legend: {
+				title: {
+					text: 'Title<br/><span style="font-size: 9px; color: #666; font-weight: normal">(Click to hide)</span>',
+					style: {
+						fontStyle: 'italic'
+					}
+				},
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'top',
+				x: -40,
+				y: 100,
+				floating: true,
+				borderWidth: 1,
+				backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+				shadow: true
+			},
+			credits: {
+				enabled: false
+			},
+			series: [{
+				name: '1800 年',
+				data: [107, 31, 335, 203, 42],
+				selected: true
+			}, {
+				name: '1900 年',
+				data: [133, 156, 447, 408, 66],
+				selected: true
+			}, {
+				name: '2008 年',
+				data: [273, 314, 654, 732, 94],
+				selected: true
+			}]
+		};
+		return (<ChartDemo options={options} />);
+	})
+	.add('basic bar with custom title and events', () => {
+		let options = {
+			chart: {
+				type: 'bar'
+			},
+			title: {
+				text: null
+			},
+			xAxis: {
+				categories: ['非洲', '美洲', '亚洲', '欧洲', '大洋洲'],
+				title: {
+					text: null
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: '人口总量 (百万)',
+					align: 'high'
+				},
+				labels: {
+					overflow: 'justify'
+				}
+			},
+			tooltip: {
+				valueSuffix: ' 百万'
+			},
+			plotOptions: {
+				bar: {
+					dataLabels: {
+						enabled: true,
+						allowOverlap: true
+					}
+				},
+				series: {
+					allowPointSelect: true,
+					events: {
+						click: function (event) {		
+							console.log(this.data);
+						}
+					},
+					point: {
+						cusor: "pointer",
+						events: {
+							click: function (event) {
+								console.log(this);
+								//this.series.data[0].select();
+								//set title text according to selected category
+								document.getElementsByClassName("chartTitle")[0].innerText = this.category;
+							}
+						}
+					}
+				}
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'top',
+				x: -80,
+				floating: true,
+				borderWidth: 1,
+				backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+				shadow: true
+			},
+			credits: {
+				enabled: false
+			},
+			series: [{
+				name: '1800 年',
+				data: [107, 31, 635, 203, 2]
+			}, {
+				name: '1900 年',
+				data: [133, 156, 947, 408, 6]
+			}, {
+				name: '2008 年',
+				data: [973, 914, 4054, 732, 34]
+			}]
+		};
+		return (
+			<div className="chartContainer">
+				<h3 className="chartTitle">This is a custom title</h3>
+				<ChartDemo options={options} />
+			</div>
+		);
+	})
+	.add('auto rotation of xAxis', () => {
+		let options = {
+			title: {
+				text: 'Auto rotated X axis labels'
+			},
+			subtitle: {
+				text: 'Drag slider to change the chart width'
+			},
+			xAxis: {
+				categories: ['January', 'February', 'March', 'April', 'May', 'June',
+							 'July', 'August', 'September', 'October', 'November', 'December']
+			},
+			series: [{
+				data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 			}]
 		};
 		return (<ChartDemo options={options} />);
