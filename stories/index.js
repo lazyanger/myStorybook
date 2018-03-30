@@ -919,7 +919,7 @@ storiesOf('Highcharts Demo', module)
 		};
 		return (<ChartDemo options={options} />);
 	})
-	.add('basic column with events on series and checkbox', () => {
+	.add('basic column with events on checkbox/legend', () => {
 		let options = {
 			chart: {
 				type: 'column'
@@ -1014,32 +1014,10 @@ storiesOf('Highcharts Demo', module)
 							return false;	//prevent default checkbox event
 						}
 					},
-					showCheckbox: true,
-					// point: {
-					// 	cusor: "pointer",
-					// 	events: {
-					// 		// click: function (event) {
-					// 		// 	console.log(this);
-					// 		// 	//alert('Category: ' + this.category + ', value: ' + this.y);
-					// 		// 	//console.log(".highcharts-legend-item.highcharts-series-2");
-					// 		// }
-
-					// 		// click: function (event) {
-					// 		// 	this.series.legendItem.styles.fontStyle = "italic";
-					// 		// 	this.series.legendItem.styles.fill = "#aaa";
-					// 		// 	// /console.log(this.series.legendItem.styles);
-					// 		// },
-					// 	}
-					// }
+					showCheckbox: true
 				}
 			},
 			legend: {
-				title: {
-					text: 'Title<br/><span style="font-size: 9px; color: #666; font-weight: normal">(Click to hide)</span>',
-					style: {
-						fontStyle: 'italic'
-					}
-				},
 				layout: 'vertical',
 				align: 'right',
 				verticalAlign: 'top',
@@ -1069,7 +1047,120 @@ storiesOf('Highcharts Demo', module)
 		};
 		return (<ChartDemo options={options} />);
 	})
-	.add('basic bar with custom title and events', () => {
+	.add('basic column with updatable title and lenged', () => {
+		let options = {
+			chart: {
+				type: 'column'
+			},
+			xAxis: {
+				categories: ['非洲', '美洲', '亚洲', '欧洲', '大洋洲'],
+				title: {
+					text: null
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: '人口总量 (百万)',
+					align: 'high'
+				},
+				labels: {
+					overflow: 'justify'
+				}
+			},
+			tooltip: {
+				valueSuffix: ' 百万'
+			},
+			plotOptions: {
+				bar: {
+					dataLabels: {
+						enabled: true,
+						allowOverlap: true
+					}
+				},
+				series: {
+					allowPointSelect: true,
+					events: {
+						click: function (event) {		
+							console.log(this.data);
+						}
+					},
+					point: {
+						cusor: "pointer",
+						events: {
+							click: function (event) {
+								console.log(this);
+
+								// ----------------------------------------------------------------------
+								// To change the chart title
+								// 1. use html element as title
+								// 2. use api: update title/chart
+								// ----------------------------------------------------------------------
+
+								// this.series.chart.title.update({
+								// 	text: this.category,
+								// 	style: {
+								// 		color: 'red'
+								// 	}
+								// });
+											
+								this.series.chart.update({
+									title: {
+										text: this.category,
+										style: {
+											color: 'red',
+											fontWeight: 'bold'
+										}
+									},
+									legend: {
+										title: {
+											text: 'Selected<br/><span style="font-size: 12px; color: red; font-weight: normal">'+ this.series.name +'</span>',
+											//text: this.series.name,
+											color: 'red'
+										},
+										//backgroundColor: 'red'
+									}
+								});
+							}
+						}
+					}
+				}
+			},
+			legend: {
+				title: {
+					text: 'Selected<br/><span style="font-size: 12px; color: red; font-weight: normal;">current</span>',
+					style: {
+						//fontStyle: 'italic',
+						//color: 'red'
+					}
+				},
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'top',
+				x: -40,
+				y: 100,
+				floating: true,
+				borderWidth: 1,
+				backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+				shadow: true
+			},
+			credits: {
+				enabled: false
+			},
+			series: [{
+				name: '1800 年',
+				data: [107, 31, 635, 203, 2]
+			}, {
+				name: '1900 年',
+				data: [133, 156, 947, 408, 6]
+			}, {
+				name: '2008 年',
+				data: [973, 914, 4054, 732, 34]
+			}]
+		};
+		return (<ChartDemo options={options} />);
+	})
+	.add('basic bar with updatable html title', () => {
 		let options = {
 			chart: {
 				type: 'bar'
@@ -1114,9 +1205,6 @@ storiesOf('Highcharts Demo', module)
 						cusor: "pointer",
 						events: {
 							click: function (event) {
-								console.log(this);
-								//this.series.data[0].select();
-								//set title text according to selected category
 								document.getElementsByClassName("chartTitle")[0].innerText = this.category;
 							}
 						}
